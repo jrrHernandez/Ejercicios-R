@@ -10,6 +10,8 @@ install.packages(c("AER", "car", "censReg","dplyr", "dummies", "dynlm",
                    "stargazer", "survival", "systemfit", "truncreg", "tseries", 
                    "ulcra", "xtable", "vars", "WDI", "wooldridge", "xts", "zoo"))
 
+require(pacman)
+p_load(dplyr)
 #obtener directorio de trabajo y seleccionar uno
 getwd()
 setwd("C:/Users/richa/Music/Este pc/GIthub/Ejercicios-R/Introducción a R")
@@ -79,4 +81,55 @@ ciudades != x
 #incluir etiquetas a vectores
 xe <- factor(x, labels =c("pequeno", "mediano", "grande", "extra grande", "gigantesco"))
 
+
 #indexar
+x <- seq(1,10)
+elemento3dex <- x[3]
+
+#ponerle nombre a vectores
+x<- seq(1,3)
+equis <- c("uno", "dos", "tres")
+names(x) <- equis
+sqrt(x)
+max(x)
+
+######crear matrices#####
+v <- c(1,2,3,4)
+A <- matrix(v, nrow=2)
+fila1<- c(1,2) ; fila2 <- c(3,4)
+A2 <- rbind(fila1, fila2) # por sus siglas: rowbind, incluye filas
+
+col1<- c(1,3) ; col2<-c(2,4)
+A3 <- cbind(col1, col2)  # por sus siglas: columbind, incluye columnas
+
+###anadir nombres a filas y columnas###
+
+colnames(A) <- c("columna1", "columna2")
+rownames(A) <- c("fila1","fila2")
+
+## Diaogonal de una matrix, identidad, indexar matrices y operaciones ##
+A <- diag(c(4,3,2)) %>% cbind(c(4,0,1)) %>% rbind(c(0,3,4))
+
+B <- diag(3)
+B
+#multiplicacion de matrices
+
+C <- A%*%B
+
+#transpuesta
+a <- t(A)
+a
+##listas##
+#en las listas se pueden almacenar nombres, matrices, vectores en un solo listado
+
+lista1 <- list(x=seq(1,10, 2), F=matrix(c(1,2,3,4), nrow=2), 
+               ciudades = c("cartagena","medellin", "moscow"))
+#extraemos el primer elemento de la lista
+lista1$x
+
+#extraemos el segundo elemento de la lista
+lista1$F
+
+
+#extraemos el tercer elemnto de la lista
+lista1$ciudades

@@ -45,5 +45,38 @@ y <- x + 1
 z <- x+y
 w <-z*y
 exp(w)
+u <- c(3,5,2,1,0)
+#funciones para analizar vectores
+length(x)
+max(x)
+min(x)
+sort(x)
+sort(u) ## organiza de menor a mayor
+sum(x) ## suma los elementos
+prod(x) #aplica el producto
+numeric(x)
+seq(10) ##secuencia del 1-10
+seq(2,10)
+seq(1,10,2)#secuencia del 1 hasta 10, sumando de 2
 
-#funciones para 
+
+
+##operadores logicos##
+x==y ##le preguntamos si el vector x es igual al de y. respuesta Falso
+x<y
+x<=y
+x>y
+x>z
+x!=y
+!x  #b es falso
+a|b ## o a es verdadero o b es verdadero, o los 2
+a&b # a y b son verdaderos
+
+##nota: los vectores no necesariamente deben ser numericos, tambien pueden ser strings
+ciudades <- c("bogota", "munich", "buenos aires")
+ciudades != x
+
+#incluir etiquetas a vectores
+xe <- factor(x, labels =c("pequeno", "mediano", "grande", "extra grande", "gigantesco"))
+
+#indexar

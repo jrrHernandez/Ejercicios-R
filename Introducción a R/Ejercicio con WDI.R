@@ -24,5 +24,19 @@ setwd("C:/Users/richa/Music/Este pc/GIthub/Ejercicios-R/Introducción a R/grafic
 ggsave(filename = "LE_femInUSA.png")
 
 
+##ahora vamos a calcular la expectativa de vida de las mujeres en el mundo arabe
 
+df <- WDI(indicator = c("SP.DYN.LE00.FE.IN"), start = 1960, end = 2014)
+df_ARAB <- filter(df, iso2c=="1A")
 
+#quedamos con los datos que nos importan; anos y life expectancy
+
+df_ARAB <- rename(df_ARAB, le_fem = SP.DYN.LE00.FE.IN) %>% select(year, le_fem)
+
+#graficamos los resultados
+
+ggplot(df_ARAB, mapping=aes(x=year, y=le_fem)) +geom_line() +labs(title="lifeexpectancy for women in arab world",
+                                                                  x="years",
+                                                                  y="life expectancy")
+
+ggsave(filename = "expectativa de vida mundo arabe.png")

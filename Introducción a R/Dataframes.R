@@ -30,4 +30,19 @@ df$total <- df$producto1 + df$producto2 + df$producto3
 df_m <- subset(df, total>=10)
 
 
+##extraer informacion de un data frame
+head(df) #muestra las primeras observaciones
+
+str(df) #muestra si el data frame esta conformado por caracteres o numeros
+
+colMeans(df) # promedio de los producto
+
+rowMeans(df) #promedio de las tiendas
+
+
+summary(df) #miinimo,1quantil, mediana, media, 3quantil, max por cada columna
+
+#para guardar todo
+
+save(list=ls(), file = "Datoejercicio.RData")
 

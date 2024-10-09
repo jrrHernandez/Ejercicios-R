@@ -21,4 +21,16 @@ ggplot() + geom_point(data =mpg, mapping= aes(x=displ, y=hwy)) +
   geom_smooth(data=mpg, mapping=aes(x=displ,y=hwy))
 # dado que esta forma repite ciertos valores, puede parecer redundante. Para ello
 #ggplot tiene la siguiente solucion
+ggplot(data= mpg, mapping= aes(x=displ, y=hwy)) +geom_point()+geom_smooth()
+#de tal manera no debemos escribir las mismas caracteristicas 2 veces.
+
+
+#incluir colores a los puntos y color a la linea de regresion
+ggplot(data = mpg, mapping= aes(x=displ, y=hwy)) +geom_point(aes(color=class, shape=class))+
+  geom_smooth(color="blue") + scale_color_grey()
+
+#incluir colores una linea de colores a los puntos dependiendo de su clase aes= aesthetic
+#guardar la grafica
+ggsave("my_plot.png", width=7, height = 5)
+
 

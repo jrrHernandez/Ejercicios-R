@@ -10,7 +10,6 @@ y <- c(3,7,3,7,10)
 plot(x,y)
 # al comando plot le podemos anadir tipos de funcion al grafico de dispercion
 plot(x,y,type="l")
-
 plot(x,y,type="b")
 plot(x,y,type="o")
 plot(x,y, type="s")
@@ -27,11 +26,13 @@ curve(dnorm(x,0,3), add= TRUE, lwd=1,lty=3)
 legend("topright", c("sigma=1", "sigma2=2", "sigma3=3"), lwd=1:3,lty = 1:3)
 
 
-#plot
+#plot y guardar plot
 plot(x,y, main="outlier")
 points(6,10)
 text(5,9, "outlier", pos=3)
 arrows(5,10,6,10, length = 0.15)
+pdf("C:/Users/richa/Music/Este pc/GIthub/Ejercicios-R/Introducción a R/graficas/outlierconlinea.pdf", width = 4, height=3)
+
 
 #con los siguientees datos podemos crear un histograma de lineas del numero ventas
 # de los productos por producto

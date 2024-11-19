@@ -3,7 +3,7 @@
 #      fines pedagogicos
 #cargamos las librerias con pacman y seleccionamos el directorio
 require(pacman)
-p_load(rio, dplyr)
+p_load(rio, dplyr, stargazer)
 
 setwd("C:/Users/richa/Music/Este pc/GIthub/Ejercicios-R/taller RCT's")
 ###################PRIMERA PARTE##################################
@@ -17,6 +17,7 @@ var(df$age)
 sd(df$age)
 min(df$age)
 max(df$age)
+
 # la media de la edad para los encuestados es de aproximadamente 35 años. su varianza
 # es de 495 aproximadamente y su desviacion estandar es de 22 años. el minimo es 0 y la edad maxima 85
                   #famsize; tamaño de la familia#
@@ -105,15 +106,60 @@ t_test_result <- t.test(health_index ~ insurance, data = df, var.equal = FALSE)
 # a la media de los que no tienen seguro de salud. Al ver el el p valor tan bajo, se puede concluir que hay hay 
 #diferencia significativa entre el indice de salud de quienes tienen un seguro y quienes no.
 
+#b) regresion lineal
 
+modelo1 <- lm(health_index ~ insurance, data = df)
+stargazer(modelo1, type = "text")
   
 
+#resultados
 
 
+#==============================================
+#               Dependent variable:    
+#  ---------------------------
+#                        health_index        
+#-----------------------------------------------
+#  insurance                    1.438***          
+#                               (0.098)          
+
+#Constant                     37.657***         
+#                              (0.089)          
+
+#-----------------------------------------------
+#  Observations                  80,634           
+#R2                             0.003           
+#Adjusted R2                    0.003           
+#Residual Std. Error     10.560 (df = 80632)    
+#F Statistic         215.041*** (df = 1; 80632) 
+#===============================================
+#  Note:               *p<0.1; **p<0.05; ***p<0.01
+
+#interpretacion
+
+# Primero debemos corroborar si es estadisticamente significativo, para ello.
+# 2*error_estandar < |b1|. lo cual 0.19 < |1.4|. Se concluye que es estadisticamente significativo.
+# Se interpreta b1 como: En promedio, si la persona cuenta con seguro de salud, su indice de salud aumenta 1.43 puntos
 
 
+#c) para verificar si eiste una diferencia sistematica debemos comparar aquellos que tienen seguro de salud con aquellos que no
+# para ello realizamos una prueba de hipotesis. Pero primero extraemos variables
 
+conS <- df %>% filter(insurance==1)
+sinS <- df %>% filter(insurance==0)
+#realizamos un loop para que realice la prueba de hipotesis para cada observacion en 
+variables_to_compare <- c("age", "famsize", "sex", "educ", "inc", "nwhite", "health_index")
+resultados <- list()
 
-
-
-
+for (var in variables_to_compare) {
+  conSe <- conS[[var]]
+  sinSe <- sinS[[var]]
+  t_test <- t.test(conSe, sinSe, na.rm=TRUE)
+  resultados[[var]] <- list(
+    media_con_seguro = mean(conSe, na.rm = TRUE),
+    media_sin_seguro = mean(sinSe, na.rm = TRUE),
+    t_stat = t_test$statistic,
+    p_value = t_test$p.value
+  )
+}
+resultados

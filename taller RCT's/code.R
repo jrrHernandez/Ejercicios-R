@@ -163,3 +163,54 @@ for (var in variables_to_compare) {
   )
 }
 resultados
+resultados$age
+resultados$famsize
+
+#age p valor    |  
+# 2.097508e-82  | 1.076379e-53
+
+
+#d) regresion con todas las variables\
+
+
+modelototal <- lm(health_index ~ insurance + nwhite + inc + educ + sex + famsize + age, data = df)
+
+stargazer(modelototal, type = "text")
+
+#================================================
+#  Dependent variable:     
+#  ----------------------------
+# health_index        
+#------------------------------------------------
+#  insurance                     0.417***          
+#                               (0.090)           
+
+#nwhite                       -1.273***          
+#                               (0.077)           
+
+#inc                          0.00004***         
+#                               (0.00000)          
+#
+#educ                          0.215***          
+#                               (0.007)           
+
+#sex                          -0.229***          
+#                               (0.067)           
+
+#famsize                      -0.331***          
+#                               (0.022)           
+
+#age                          -0.225***          
+#                               (0.002)           
+
+#Constant                     42.372***          
+#                             (0.156)           
+
+------------------------------------------------
+#  Observations                   80,634           
+#R2                             0.204            
+#Adjusted R2                    0.204            
+#Residual Std. Error      9.437 (df = 80626)     
+#F Statistic         2,945.656*** (df = 7; 80626)
+#================================================
+#  Note:                *p<0.1; **p<0.05; ***p<0.01
